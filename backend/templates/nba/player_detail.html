@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!--Title-->
+	<title>NBA用户页面</title>
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/light-bootstrap-dashboard.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	 crossorigin="anonymous">
+
+	<!--Fonts and icons-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	 crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="sidebar" data-color="blue">
+			<div class="sidebar-wrapper">
+				<div class="logo">
+					<a href="/" class="simple-text"> NBA数据库 </a>
+				</div>
+
+				<ul class="nav">
+					<li>
+						<a href="/">
+							<i class="pe-7s-graph"></i>
+							<p>总览</p>
+						</a>
+					</li>
+					<li>
+						<a href="/teams/">
+							<i class="pe-7s-note2"></i>
+							<p>队伍</p>
+						</a>
+					</li>
+					<li>
+						<a href="/coaches/">
+							<i class="pe-7s-user"></i>
+							<p>教练</p>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/players/">
+							<i class="pe-7s-users"></i>
+							<p>球员</p>
+						</a>
+					</li>
+					<li>
+						<a href="/games/">
+							<i class="pe-7s-news-paper"></i>
+							<p>赛事</p>
+						</a>
+					</li>
+					<li>
+						<a href="/forms/players/">
+							<i class="pe-7s-search"></i>
+							<p>球员数据查询</p>
+						</a>
+					</li>
+					<li>
+						<a href="  /forms/games/">
+							<i class="pe-7s-search"></i>
+							<p>比赛数据查询</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="main-panel">
+			<nav class="navbar navbar-default navbar-fixed">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+						
+					</div>
+
+					<div class="collapse navbar-collapse">
+
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"> </a></li>
+							<li><a href="#">  </a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="text-center">
+						<img src="/static/playerpic/{{player.playerid}}.png" alt="{{player.name}}"   />
+						<h3>{{ player.name}}</h3>
+							<p class="category">{{ player.role }} |
+								<a href="/team/{{ player.teamid.teamid }}/"> {{ player.teamid.name }}</a>
+							</p>
+					</div>
+					
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+
+								<div class="header">
+									<h4 class="title">参与赛事</h4>
+								</div>
+
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											
+											<th>比赛信息</th>
+											<th>是否首发</th>
+											<th>上场时间（分钟）</th>
+											<th>本场得分</th>
+
+										</thead>
+										<tbody>
+											<!--Basic info about player and what games they played in-->
+											{% for game in games_played %}
+											<tr>
+												
+												<td> <a href="/game/{{game.gameid.gameid}}/"
+													/>{{game.gameid}}</a>
+												</td>
+												<td>{{ game.get_isfirst_display }}</td>
+												<td>{{ game.time}}</td>
+												<td>{{game.pts}}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+									</div>
+																
+
+							</div>
+						</div>
+
+						
+					</div>
+
+				</div>
+			</div>
+
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<p class="copyright text-center">
+						Powered by Django 3.2 小组成员：陈乐偲，刘原冶，梁之扬
+					</p>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+
+</body>
+
+</html>

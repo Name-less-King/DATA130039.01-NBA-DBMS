@@ -1,0 +1,4 @@
+Django==3.2
+mysqlclient==2.0.3
+django-admin-honeypot==1.1.0
+django-simpleui==2021.6.2
