@@ -53,4 +53,4 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 
-打开浏览器，访问http://127.0.0.1:8000/，即可进入数据库系统。
+打开浏览器，访问http://127.0.0.1:8000/ ，即可进入数据库系统。
